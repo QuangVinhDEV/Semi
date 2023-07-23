@@ -40,7 +40,10 @@
                         <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
                         <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                     </svg>
-                    <a style="margin-left: 5px">Purchase order</a>
+                    <a href="{{ path('purchase_order') }}" style="margin-left: 5px; color: inherit; text-decoration: none;">
+                         <span class="profile-link" onmouseover="this.style.color='#d2691e'" onmouseout="this.style.color='inherit'">
+                           Purchase order
+                        </span></a>
                 </div><br>
             </div>
 
@@ -130,13 +133,13 @@
                             <img id="previewImage" src="{{ asset('uploads/image/' ~ user.avatar) }}" alt="" style="width: 70px; height: 70px; border: 0;" class="rounded-pill">
                         </div>
                         <div class="col">
-                                {{ form_row(form.avatarImage, {
-                                    'label': 'Choose Photo',
-                                    'id' : 'avatarInput',
-                                    'attr': {
-                                        'class': 'form-control'
-                                    }
-                                }) }}
+                            {{ form_row(form.avatarImage, {
+                                'label': 'Choose Photo',
+                                'id' : 'avatarInput',
+                                'attr': {
+                                    'class': 'form-control'
+                                }
+                            }) }}
                         </div><br>
                         <a style="font-size: 13px">Maximum file size 1 MB
                             Format: .JPEG, .PNG</a>

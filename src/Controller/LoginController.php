@@ -10,10 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Request;
+
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function index(AuthenticationUtils $authenticationUtils, ManagerRegistry $doctrine): Response
+    public function index(AuthenticationUtils $authenticationUtils, ManagerRegistry $doctrine, Request $request): Response
     {
         $categories = $doctrine->getRepository(Category::class)->findAll();
         // get the login error if there is one
@@ -22,11 +24,16 @@ class LoginController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // Get the password field from the request (you may need to adjust the field name based on your form)
+        $password = $request->request->get('_password');
+
+
         return $this->render('login/index.html.twig', [
             'controller_name' => 'LoginController',
             'last_username' => $lastUsername,
             'error'         => $error,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'password' => $password,
         ]);
     }
 

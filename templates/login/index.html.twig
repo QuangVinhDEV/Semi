@@ -1,7 +1,7 @@
 
 {% block body %}
     <title>Login</title>
-    <link rel="icon" href="{{ asset ('uploads/image/logo.ico') }}">
+    <link rel="icon" href="{{ asset ('uploads/image/logo.webp') }}">
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -29,39 +29,37 @@
                     <div class="card" style="border-radius: 1rem;" >
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                <img src="{{ asset('uploads/image/278252854_3176303079280156_1104298092568808500_n.jpg')}}"
+                                <img src="{{ asset('uploads/image/tocthat1.webp')}}"
                                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%" />
                             </div>
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 
                                     <form action="{{ relative_path('/login') }}" method="post">
-                                        <a href="{{ relative_path('/product/list') }}">
                                         <div class="d-center align-items-center mb-7 pb-1" style="margin-left: 25%; font-size: 80px">
-                                            <i class="fab fa-phoenix-framework" style="color:#F8C471; font-size: 80px"></i>
-                                            <span class="h1 fw-bold mb-0" style="color: #505050">VON</span>
-                                        </div></a>
+                                            <a> <img src="{{ asset('uploads/image/logowina.webp')}}"> </a>
+                                        </div>
 
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="username" name="_username" class="form-control form-control-lg" value="{{ last_username }}" />
+                                            <input type="text" id="username" name="_username" class="form-control form-control-lg {% if last_username is not empty %}has-value{% endif %}" value="{{ last_username }}" />
                                             <label class="form-label" for="username">Email address</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="password" name="_password" class="form-control form-control-lg" />
+                                            <input type="password" id="password" name="_password" class="form-control form-control-lg {% if password is not empty %}has-value{% endif %}" />
                                             <label class="form-label" for="password">Password</label>
                                         </div>
-                                                {% if error %}
-                                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                                {% endif %}
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
                                         <div class="pt-1 mb-4">
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
 
 
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{{ relative_path('/app/register') }}"
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{{ relative_path('/register') }}"
                                                                                                                   style="color: #393f81;">Register here</a></p>
                                     </form>
 
@@ -73,10 +71,30 @@
             </div>
         </div>
     </section>
-<style>
-    .form-outline{
-        background-color: #FAFAFA;
-    }
-</style>
+    <style>
+        .form-outline {
+            background-color: #FAFAFA;
+            position: relative;
+        }
+
+        .form-outline .form-label {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: all 0.2s ease;
+            color: #333; /* Default label color */
+        }
+
+        /* Style the label when the input has a value */
+        .form-outline input.has-value + .form-label,
+        .form-outline input:focus + .form-label {
+            top: 0;
+            left: 1rem;
+            font-size: 12px;
+            color: #555; /* Label color when input has value or is focused */
+        }
+    </style>
 
 {% endblock %}
